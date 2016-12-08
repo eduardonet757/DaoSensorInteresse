@@ -1,0 +1,237 @@
+Interface: Temperatura.java
+
+public interface Temperatura {
+        public double getValue();
+        public void setValue(double value) throws Exception;
+        public void getFREEZE();
+        public void getBOIL();
+        public void getZERO();
+}
+
+
+
+Classe Java: CelsiusTemperatura.Java
+
+public class CelsiusTemperature implements Temperature {
+
+    private double value;
+    private final double FREEZE = 0; 
+    private final double BOIL = 100;
+    private final double ZERO = -273;
+
+    public CelsiusTemperature () { }
+
+    @Override
+    public double getValue() { return value; }
+
+    @Override
+    public void setValue(double value) throws Exception {
+        if(value < ZERO) throw new Exception("Não há temperatura abaixo do zero absoluto");
+        else this.value = value;
+}
+
+    @Override 
+    public double getFREEZE() { return FREEZE; }
+    
+    @Override
+    public double getBOIL() { return BOIL; }
+
+    @Override
+    public double getZERO() { return ZERO; }
+
+    @Override
+    public String toString() {
+        return getValue()+" C";
+}
+
+    @Override
+    public boolean equals(object other) {
+    if(other instanceof CelsiusTemperature)
+    {
+        CelsiusTemperature cTemp = (CelsiusTemperature)other;
+        return (cTemp.getValue() == getValue() );
+    }
+    else return false;
+  }
+} 
+
+
+
+Classe Java: FahrenheitTemperatura.java
+
+public class FahrenheitTemperature implements Temperature {
+
+    private double value;
+    private final double FREEZE = 0; 
+    private final double BOIL = 212;
+    private final double ZERO = -459.4;
+
+    public FahrenheitTemperature () { }
+
+    @Override
+    public double getValue() { 
+        return value; 
+}
+
+    @Override
+    public void setValue(double value) throws Exception {
+        if(value < ZERO) throw new Exception("Não há temperatura abaixo do zero absoluto");
+        else this.value = value;
+}
+
+    @Override 
+    public double getFREEZE() { return FREEZE; }
+    
+    @Override
+    public double getBOIL() { return BOIL; }
+
+    @Override
+    public double getZERO() { return ZERO; }
+
+    @Override
+    public String toString() {
+        return getValue()+" F";
+}
+
+    @Override
+    public boolean equals(object other) {
+    if(other instanceof FahrenheitTemperature)
+    {
+        FahrenheitTemperature fTemp = (FahrenheitTemperature)other;
+        return (fTemp.getValue() == getValue() );
+    }
+    else return false;
+  }
+}
+
+
+
+Classe Java: TemperatureTransformer.Java
+
+public class TemperatureTransformer {
+    public TemperatureTransformer() { }
+
+    public Temperature converte (Temperature temp) throws Exception {
+    if (temp instanceof CelsiusTemperature) return convertToFahrenheit(temp);
+    else return convertToCelsius(temp);
+}
+
+private Temperature convertToFahrenheit(Temperature celsius) throws Exception {
+    FahrenheitTemperature f = new FahrenheitTemperature();
+    double cvalue = celsius.getValue();
+    double fvalue = 1.8*cvalue + f.getFREEZE();
+    f.setValue(fvalue);
+    return f;
+}
+
+private Temperature convertToCelsius(Temperature fahrenheit) throws Exception {
+    CelsiusTemperature c = new CelsiusTemperature();
+    double fvalue = fahrenheit.getValue();
+    double cvalue = (5/9*fvalue - 5*fahrenheit.getFREEZE();
+    c.setValue(cvalue);
+    return c;
+}
+}
+
+
+
+TemperatureTransformerTest.java
+
+public class TemperatureTransformerTest extends TestCase {
+
+    public TemperatureTransformerTest(String TestName) {
+        super(testName);
+    }
+
+    public void testConvert() throws Exception {
+    Temperature t = new FahrenheitTemperature();
+    t.setValue(32);
+    TemperatureTransformer tc = new TemperatureTransformer();
+    Temperature f = tc.convert(t);
+    assertTrue(f.getValue() == 0); 
+}
+}
+
+
+
+import java.util.Scanner;
+
+public class CelsiusFahrenheit {
+
+static double conversaoCelsiusFahrenheit(double C) {
+return 9 * C / 5 * 32;
+}
+
+public static void main
+Scanner leitor = new Scanner(System.in);
+System.out.println("Digite um numero em Celcius");
+double celsius = leitor.nextInt();
+System.out.println("O numero convertido em Fahrenheit é");
+System.out.println(conversaoCelsiusFahrenheit(celsius));
+
+}
+}
+
+
+https://www.youtube.com/watch?v=nekDyKBcnhA
+
+https://www.iconfinder.com/
+
+
+
+
+String tx = (String)jComboBox1.getSelectedItem();
+        
+        if (jRadioButton1.isSelected()&&tx.equals("Fahrenheit"))
+        {
+             String text = jTextField1.getText();
+             float cel = Float.parseFloat(text);
+             float far = (float) (cel * 1.8 + 32);
+             jTextField2.setText(""+far);
+        }
+       
+        if(jRadioButton1.isSelected()&&tx.equals("Kelvin"))
+         
+        }
+             String text = jTextField1.getText().
+             float cel = float.parseFloat(text);
+             float kel = (float) (cel+273.15);
+             jTextField2.setText(""+kel);         
+    }  
+
+}
+            
+buttonGroup1.add(jRadioButton1);
+buttonGroup1.add(jRadioButton2);
+buttonGroup1.add(jRadioButton3);
+
+
+
+Celsius Fahrenheit °F = °C × 1,8 + 32 
+Celsius kelvin K = C° + 273,15 
+Celsius Rankine °R = °C × 1,8 + 32 + 459,67 
+Celsius Réaumur °Ré = °C × 0,8 
+kelvin Celsius °C = K - 273,15 
+kelvin Fahrenheit °F = K × 1,8 - 459,67 
+kelvin Rankine °R = K × 1,8 
+kelvin Réaumur °Ré = (K - 273,15) × 0,8 
+Fahrenheit Celsius °C = (°F - 32) / 1,8 
+Fahrenheit kelvin K = (°F + 459,67) / 1,8 
+Fahrenheit Rankine °R = °F + 459,67 
+Fahrenheit Réaumur °R = (°F - 32) / 2,25 
+Rankine Celsius °C = (°R - 32 - 459,67) / 1,8 
+Rankine Fahrenheit °F = °R - 459,67 
+Rankine kelvin K = °R / 1,8 
+Rankine Réaumur °R = °Ré × 2,25 + 491,67 
+Réaumur Celsius °C = °Ré / 0,8 
+Réaumur Fahrenheit °F = °Re × 2,25 + 32 
+Réaumur kelvin K = °Ré × 1,25 + 273,15 
+Réaumur Rankine °Ré = (°R - 491,67) × 4/9
+
+Rankine
+Réaumur
+
+https://github.com/pffy/java-temperature-scales/blob/master/README.md
+
+
+https://anielacole.wordpress.com/2011/01/24/implementando-testes-com-junit-parte-ii/
