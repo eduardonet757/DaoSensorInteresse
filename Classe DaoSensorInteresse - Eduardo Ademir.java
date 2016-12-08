@@ -1,4 +1,3 @@
-// Classe DaoSensorInteresse - Eduardo Ademir
 public SensorInteresse getSensorByID(int id) throws ParseException {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
